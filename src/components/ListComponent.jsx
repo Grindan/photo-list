@@ -9,8 +9,9 @@ export default class ListComponent extends Component {
         // const { activeItem } = this.state
 
         return (
-            
-            <h2>List Comp</h2>
+            <div className='page-content'>
+                <h2>List Comp</h2>
+            </div>
         )
     }
 }

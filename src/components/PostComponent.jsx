@@ -9,7 +9,9 @@ export default class PostComponent extends Component {
         // const { activeItem } = this.state
 
         return (
-            <h2>Post Component</h2>
+            <div className='page-content'>
+                <h2>Post Component</h2>
+            </div>
         )
     }
 }
