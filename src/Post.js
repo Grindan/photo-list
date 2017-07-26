@@ -1,8 +1,8 @@
 export default class Post {
-    constructor(link, author = 'anonymous', description = '') {
+    constructor(link, author, description = 'photo post') {
         this.link = link;
-        this.author = author;
+        this.author = author ? author : 'anonymous';
         this.description = description;
-        this.time = new Date();
+        this.date = new Date();
     }
 }

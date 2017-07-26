@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
-import Post from '../Post'
+// import Post from '../Post'
 
 export default class NewPostComponent extends Component {
-    state = {}
+    // state = {}
 
-    handleChange = (e, { value }) => this.setState({ value })
+    // handleChange = (e, { value }) => this.setState({ value })
 
     render() {
         // const { activeItem } = this.state
         console.log('new post render');
-        // var p = new Post('lllink', 'dddescription');
 
-        const { value } = this.state;
+        // const { value } = this.state;
 
         return (
             <div className='page-content'>

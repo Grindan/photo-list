@@ -2,7 +2,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/playstation-pattern.png');
+    background-color: #eee;
+    /*background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/playstation-pattern.png');*/
 }
 
 .topMenu {
@@ -13,21 +14,27 @@ body {
     z-index: 5;
 }
 
-.ui.menu .header.item { padding: 0.7em 2.5em; color:#4183c4; }
+.ui.menu .header.item { padding: 0.7em 2.5em; color:#00b5ad; }
+#root .ui.menu a.item.active { color:#00b5ad; }
 
-#root .ui.menu a.item.active { color:#4183c4; }
-
-.page-content { margin: 60px 10%; }
+.page-content { margin: 60px auto; }
 .post-card { margin: auto; }
+.ui.grid { margin: 0; }
+h1 { text-align: center; margin-bottom: 30px; }
 
-h2 {
-    text-align: center;
-    /*color: #4183c4;*/
+.ui.modal > .content > .description { margin-right: 20px; }
+.ui.image img { max-height: 250px; margin: 0 auto; }
+.ui.button.modal-btns {
+    position: absolute;
+    right: 0;
+    top: 2px;
 }
 
-.ui.button.btn-plus {
-    position: fixed;
-    background: #4183c4;
-    color: white;
+.ui.card { margin: 0 auto; }
+.ui.card:hover { opacity: 0.8; }
+.ui.card > .content > .description {
+    max-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 

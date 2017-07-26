@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom'
-import { BrowserRouter } from 'react-router-dom';
 import { Router, Route, IndexRedirect, browserHistory } from 'react-router'
 
 import './index.css';
