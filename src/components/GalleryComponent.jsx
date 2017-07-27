@@ -1,26 +1,16 @@
 import React, { Component } from 'react'
 import { Grid } from 'semantic-ui-react'
 import PostComponent from './PostComponent'
-import { initLS, getPostsFromLS, getLSLength } from '../services/savingService'
+import { initLS, getPostsFromLS } from '../services/savingService'
+import ModalNewPostComponent from './ModalNewPostComponent'
+import ModalPostComponent from './ModalPostComponent'
 
 export default class GalleryComponent extends Component {
-    state = { LSlength: 0 }
-    componentDidMount() {
-        console.log('componentDidMount function');
-        var self = this;
-        setInterval(() => {
-            console.log('check LS: begin');
-            if (self.state.LSlength != getLSLength()) {
-                console.log('check LS: need update');
-                self.forceUpdate();
-            } else { console.log('check LS: need not in update') }
-        }
-        , 100);
-    }
+    state = { postModalShown: false }
+    addPost = () => this.setState();
+    showPostModal = () => this.setState({ postModalShown: true });
 
     render() {
-        // const { activeItem } = this.state
-
         if (!localStorage['photoPosts']) {
             initLS();
         }
@@ -28,19 +18,23 @@ export default class GalleryComponent extends Component {
         console.log('gallery render');
         return (
             <div className='page-content'>
+                <ModalNewPostComponent addNewPost={ this.addPost } />
+                <ModalPostComponent isShown={ this.state.postModalShown } link={ this.state.photoLink } />
                 <h1>Gallery</h1>
                 <Grid doubling columns={4}>
                     {
                         getPostsFromLS()
-                            .sort((a, b) => a.date - b.date)
+                            .sort((a,b) => {
+                                if (a.date > b.date) { return 1 }
+                                else { return -1; }
+                            })
                             .map(p =>
                                 (<Grid.Column className='post-card animated fadeInUp'>
-                                    <PostComponent post={p}/>
+                                    <PostComponent post={p} showPost={ this.showPostModal }/>
                                 </Grid.Column>)
                         )
                     }
                 </Grid>
-                { this.setState({ LSlength: localStorage['photoPosts'].length }) }
             </div>
         )
     }
