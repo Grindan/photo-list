@@ -19,7 +19,7 @@ export default class NewPostComponent extends Component {
                 <Form>
                     <Form.Input label='Your nickname' placeholder='Your nickname' />
                     <Form.Input label='Link to photo' placeholder='Link to photo' />
-                    <Form.TextArea label='About' placeholder='Tell us more about this photo...' />
+                    <Form.TextArea label='Description' placeholder='Tell us more about this photo...' />
                     <Form.Group>
                         <Form.Button>Submit</Form.Button>
                         <Form.Button>Preview</Form.Button>
