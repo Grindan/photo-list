@@ -2,32 +2,28 @@ import React, { Component } from 'react'
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 class ModalPostComponent extends Component {
-    state = { open: this.props.isShown, link: this.props.link }
+    state = { open: this.props.isShown }
 
     show = (dimmer) => () => this.setState({ dimmer, open: true })
-    close = () => this.setState({ open: false })
+    close = () => this.setState({ open: !this.open })
 
     render() {
-        const { open, dimmer } = this.state
+
+        if (!this.props.isShown || !!this.state.post) { return null; }
 
         return (
             <div>
-                {console.log('state isShown: ' + this.state.open)}
-                {console.log('state photoLink: ' + this.state.link)}
-                <Button onClick={this.show(true)}>Default</Button>
-
-                <Modal dimmer={ dimmer } open={ open } onClose={ this.close }>
+                <Modal open={ this.props.isShown } onClose={ this.close }>
                 <Modal.Header>Photo post</Modal.Header>
                 <Modal.Content image>
-                    <Image wrapped size='medium' src='/assets/images/avatar/large/rachel.png' />
+                    <Image wrapped size='medium' src={ this.props.post.link } />
                     <Modal.Description>
-                    <Header>Default Profile Image</Header>
-                    <p>We've found the following gravatar image associated with your e-mail address.</p>
-                    <p>Is it okay to use this photo?</p>
+                        <Header>{ this.props.post.author }</Header>
+                        <p>{ this.props.post.description }</p>
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button color='black' onClick={ this.close }> Back </Button>
+                    <Button color='black' onClick={ this.props.close }> Back </Button>
                 </Modal.Actions>
                 </Modal>
             </div>

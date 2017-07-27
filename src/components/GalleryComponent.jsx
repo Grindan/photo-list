@@ -6,20 +6,23 @@ import ModalNewPostComponent from './ModalNewPostComponent'
 import ModalPostComponent from './ModalPostComponent'
 
 export default class GalleryComponent extends Component {
-    state = { postModalShown: false }
+    state = { postModalShown: false, selectedPost: null }
     addPost = () => this.setState();
-    showPostModal = () => this.setState({ postModalShown: true });
+    showPost = () => this.setState({ postModalShown: true });
+    cardOnClick = (post) => this.setState({ selectedPost: post, postModalShown: true });
+    closeModal = () => { this.setState({ postModalShown: false })}
 
     render() {
-        if (!localStorage['photoPosts']) {
-            initLS();
-        }
+        if (!localStorage['photoPosts']) { initLS(); }
 
-        console.log('gallery render');
         return (
             <div className='page-content'>
                 <ModalNewPostComponent addNewPost={ this.addPost } />
-                <ModalPostComponent isShown={ this.state.postModalShown } link={ this.state.photoLink } />
+                <ModalPostComponent
+                    isShown={ this.state.postModalShown && !!this.state.selectedPost }
+                    close={ this.closeModal }
+                    post={ this.state.selectedPost }
+                />
                 <h1>Gallery</h1>
                 <Grid doubling columns={4}>
                     {
@@ -30,7 +33,7 @@ export default class GalleryComponent extends Component {
                             })
                             .map(p =>
                                 (<Grid.Column className='post-card animated fadeInUp'>
-                                    <PostComponent post={p} showPost={ this.showPostModal }/>
+                                    <PostComponent post={p} cardOnClick={() => this.cardOnClick(p) } />
                                 </Grid.Column>)
                         )
                     }

@@ -14,17 +14,13 @@ function initLS() {
 }
 
 function addPostToLS(post) {
-    var posts = JSON.parse(localStorage['photoPosts']);
+    var posts = JSON.parse(localStorage['photoPosts'] || '[]');
     posts.push(post);
     localStorage['photoPosts'] = JSON.stringify(posts);
 }
 
 function getPostsFromLS() {
-    return JSON.parse(localStorage['photoPosts']);
+    return JSON.parse(localStorage['photoPosts'] || '[]');
 }
 
-function getLSLength() {
-    return localStorage['photoPosts'].length;
-}
-
-export { initLS, addPostToLS, getPostsFromLS, getLSLength }
+export { initLS, addPostToLS, getPostsFromLS }
