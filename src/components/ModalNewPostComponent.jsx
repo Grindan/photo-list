@@ -18,14 +18,6 @@ class ModalNewPostComponent extends Component {
             imageLoaded: false,
         }
     }
-    // state = {
-    //     openMain: false,
-    //     openError: false,
-    //     inputNickname: '',
-    //     inputLink: '',
-    //     inputDescription: '',
-    //     imageLoaded: false,
-    // }
 
     // input watcher
     inputNicknameChange = (event) => this.setState({ inputNickname: event.target.value });
@@ -39,15 +31,6 @@ class ModalNewPostComponent extends Component {
     // new post modal
     show = (dimmer) => () => this.setState({ dimmer, openMain: true })
     cancel = () => this.setState({ openMain: false, inputNickname: '', inputLink: '', inputDescription: '', imageLoaded: false })
-    // post = () => {
-    //     if (!this.state.imageLoaded) { this.errorOpen() }
-    //     else {
-    //         var newPost = new Post(this.state.inputLink, this.state.inputNickname, this.state.inputDescription);
-    //         addPostToLS(newPost);
-    //         this.props.addNewPost();
-    //         this.cancel();
-    //     }
-    // }
 
     add = () => {
         if (!this.state.imageLoaded) { this.errorOpen() }

@@ -41,8 +41,6 @@ class GalleryComponent extends Component {
 }
 
 const mapStateToProps = (store) => {
-    console.log('Gallery: mapStateToProps');
-    console.log(store);
     return {
         posts: store.posts
     }
