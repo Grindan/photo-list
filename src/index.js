@@ -1,21 +1,22 @@
 import React from 'react';
 import { render } from 'react-dom'
-import { Router, Route, IndexRedirect, browserHistory } from 'react-router'
+// import {  IndexRedirect, browserHistory } from 'react-router'
+
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducers from './reducers';
 
 import './index.css';
 
 import App from './components/App';
-import GalleryComponent from './components/GalleryComponent'
-import NewPostComponent from './components/NewPostComponent'
+// import GalleryComponent from './components/GalleryComponent'
 
+const store = createStore(reducers, {}, f => f);
 
-render(
-    <Router history={browserHistory}>
-        <Route path='/' component={App}>
-            <IndexRedirect to='allPosts' />
-            <Route path='/allPosts' component={GalleryComponent} />
-            <Route path='/newPost' component={NewPostComponent} />
-        </Route>
-    </Router>,
-    document.getElementById('root')
-)
+const Root = (
+    <Provider store={store}>
+        <App />
+    </Provider>
+);
+
+render(Root, document.getElementById('root'))

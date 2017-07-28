@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Card, Image, Icon } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 
-export default class PostComponent extends Component {
+class PostComponent extends Component {
     render() {
         return (
             <Card className='post-card' onClick={ this.props.cardOnClick }>
@@ -14,10 +14,9 @@ export default class PostComponent extends Component {
                         { this.props.post.description }
                     </Card.Description>
                 </Card.Content>
-                <Card.Content extra>
-                    <Icon name='calendar' /> { this.props.post.date.substring(0, 10) }
-                </Card.Content>
             </Card>
         )
     }
 }
+
+export default PostComponent;

@@ -1,17 +1,31 @@
 import React, { Component } from 'react'
 import { Popup, Button, Image, Modal, Form, Header, Icon } from 'semantic-ui-react'
 import Post from '../Post'
-import { addPostToLS } from '../services/savingService'
+// import { addPostToLS } from '../services/savingService'
 
-export default class ModalNewPostComponent extends Component {
-    state = {
-        openMain: false,
-        openError: false,
-        inputNickname: '',
-        inputLink: '',
-        inputDescription: '',
-        imageLoaded: false,
+import { connect } from 'react-redux';
+import { addPost } from './../actions/posts';
+
+class ModalNewPostComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            openMain: false,
+            openError: false,
+            inputNickname: '',
+            inputLink: '',
+            inputDescription: '',
+            imageLoaded: false,
+        }
     }
+    // state = {
+    //     openMain: false,
+    //     openError: false,
+    //     inputNickname: '',
+    //     inputLink: '',
+    //     inputDescription: '',
+    //     imageLoaded: false,
+    // }
 
     // input watcher
     inputNicknameChange = (event) => this.setState({ inputNickname: event.target.value });
@@ -25,13 +39,22 @@ export default class ModalNewPostComponent extends Component {
     // new post modal
     show = (dimmer) => () => this.setState({ dimmer, openMain: true })
     cancel = () => this.setState({ openMain: false, inputNickname: '', inputLink: '', inputDescription: '', imageLoaded: false })
-    post = () => {
+    // post = () => {
+    //     if (!this.state.imageLoaded) { this.errorOpen() }
+    //     else {
+    //         var newPost = new Post(this.state.inputLink, this.state.inputNickname, this.state.inputDescription);
+    //         addPostToLS(newPost);
+    //         this.props.addNewPost();
+    //         this.cancel();
+    //     }
+    // }
+
+    add = () => {
         if (!this.state.imageLoaded) { this.errorOpen() }
         else {
             var newPost = new Post(this.state.inputLink, this.state.inputNickname, this.state.inputDescription);
-            addPostToLS(newPost);
-            this.props.addNewPost();
-            this.cancel();
+            this.props.addPost(newPost);
+            this.cancel()
         }
     }
 
@@ -84,7 +107,7 @@ export default class ModalNewPostComponent extends Component {
                             icon='checkmark'
                             labelPosition='right'
                             content="Post it"
-                            onClick={ this.post }
+                            onClick={ this.add }
                         />
                     </Modal.Actions>
                 </Modal>
@@ -99,7 +122,7 @@ export default class ModalNewPostComponent extends Component {
                         <h3>Your link is broken :(</h3>
                     </Modal.Content>
                     <Modal.Actions>
-                        <Button color='green' onClick={ this.errorClose } inverted>
+                        <Button type='submit' color='green' onClick={ this.errorClose } inverted>
                             <Icon name='write' /> Understand
                         </Button>
                     </Modal.Actions>
@@ -108,3 +131,12 @@ export default class ModalNewPostComponent extends Component {
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    console.log('Modal: mapDispatchToProps');
+    return {
+        addPost: (post) => addPost(post)(dispatch),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ModalNewPostComponent);
